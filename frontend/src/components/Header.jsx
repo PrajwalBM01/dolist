@@ -1,8 +1,22 @@
 import { CheckSquareOffset, LineVertical } from '@phosphor-icons/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useStore } from '../store'
 
 const Header = () => {
+    const isAuth = useStore((state) => state.isAuth);
+    const setAuth = useStore((state) => state.setAuth);
+
+    useEffect(() => {
+        const isToken = localStorage.getItem("token");
+        if(isToken) {
+            setAuth(true);
+        } else {
+            setAuth(false);
+        }
+    }, [isAuth]);
+    
+
   return (
     <header className='w-full '>
         <nav className='container mx-auto px-4 sm:px-6 lg:px-8'>
@@ -14,7 +28,26 @@ const Header = () => {
                         Dolist
                     </Link>
                 </div>
-                <div className='flex gap-4 items-center justify-center'>
+
+                {isAuth ? (<div className='flex gap-4 items-center justify-center'>
+                    
+                    <div className=' py-3 px-4 text-mateBlack font-semibold text-xl'>
+                        {localStorage.getItem("user")}
+                    </div>
+                    
+                    <Link 
+                        to={"/"}
+                        onClick={()=>{
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("user");
+                            setAuth(false)
+                        }}
+                    >
+                        <div className='bg-orangeRed text-white py-3 px-4 rounded-xl cursor-pointer font-semibold hover:bg-orange-700'>
+                            Logout
+                        </div>
+                    </Link>
+                </div>) : (<div className='flex gap-4 items-center justify-center'>
                     <p className='font-semibold text-xl text-mateBlack'>Time & Tide wait for none</p>
                     <LineVertical size={35} color="#121212" weight="light" />
 
@@ -29,8 +62,7 @@ const Header = () => {
                             Start for free
                         </div>
                     </Link>
-                    
-                </div>
+                </div>)}
             </div>
         </nav>
     </header>

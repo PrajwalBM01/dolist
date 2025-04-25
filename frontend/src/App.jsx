@@ -5,17 +5,29 @@ import Header from './components/Header'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Notfound from './pages/NotFOund'
+import Dashboard from './pages/Dashboard'
+import Protectedroutes from './components/Protectedroutes'
+import { useStore } from './store'
 
 const App = () => {
+  
   return (
     <BrowserRouter>
       <div>
         <Header/>
         <main>
           <Routes>
+            {/*public routes*/}
             <Route path='/' element={<Landing/>}/>
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/login' element={<Login/>}/>
+
+            {/*protected routes*/}
+            <Route element={<Protectedroutes/>}>
+              <Route path='/dashboard' element={<Dashboard/>}/>
+            </Route>
+
+            {/*404 route*/}
             <Route path='/*' element={<Notfound/>}/>
           </Routes>
         </main>

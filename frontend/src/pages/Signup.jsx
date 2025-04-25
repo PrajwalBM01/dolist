@@ -1,23 +1,59 @@
 import React, { useState } from 'react'
 import signupImage from '../assets/signup.png'
-import { Link } from 'react-router-dom'
-import { Password } from '@phosphor-icons/react'
+import { ToastContainer, toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom'
+import axios from "axios"
+import { useStore } from '../store';
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("")
-  
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const isAuth = useStore((state)=>state.isAuth);
+  const setAuth = useStore((state)=>state.setAuth);
 
 
-  function handleSubmit(e){
+  async function handleSubmit(e){
     e.preventDefault(); // Prevent default form submission (page reload)
-    console.log('Form submitted with value:', email,username,password);
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/v1/auth/signup",{
+        username,
+        email,
+        password
+      });
+
+      toast(res.data.msg);
+
+      if(res.status === 201){
+        setTimeout(() => {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user", res.data.user);
+          navigate('/dashboard');
+          setAuth(true)
+        }, 4000);
+        
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.response) {
+        // Server responded with an error status
+        toast.error(error.response.data.msg || "Signup failed");
+      } else if (error.request) {
+        // Request was made but no response received
+        toast.error("No response from server. Please try again later.");
+      } else {
+        // Something else caused the error
+        toast.error("Error occurred. Please try again.");
+      }
+    }
   }
 
 
   return (
     <div className=' flex items-center justify-center h-[600px]'>
+      <ToastContainer position="top-center" theme="dark"/>
       <div className='   container flex items-center justify-center gap-5'>
         <div className='  size-auto m-auto flex flex-col'>
           <div className='flex flex-col justify-center my-6'>
