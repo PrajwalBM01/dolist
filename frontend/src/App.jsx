@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Landing from './pages/Landing'
-import Header from './components/Header'
+import Header from './layouts/Header'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Notfound from './pages/NotFOund'

@@ -1,7 +1,12 @@
 import { CheckSquareOffset, LineVertical } from '@phosphor-icons/react'
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useStore } from '../store'
+import { FloatingDockDemo } from '../components/FlotingDockDemo'
+import {
+    IconUserFilled,
+    IconLogout
+  } from "@tabler/icons-react";
 
 const Header = () => {
     const isAuth = useStore((state) => state.isAuth);
@@ -20,34 +25,37 @@ const Header = () => {
   return (
     <header className='w-full '>
         <nav className='container mx-auto px-4 sm:px-6 lg:px-8'>
+            {isAuth ? (
+                <div className='flex justify-center items-center h-16 my-3'>
+                    <div className='flex gap-1 font-semibold rounded-2xl px-3 py-2'>
+                        <IconUserFilled className='text-orangeRed'/>
+                        {localStorage.getItem("user")}
+                    </div>
+
+                    <FloatingDockDemo/>
+                    
+                    <Link 
+                        className=' flex gap-2 rounded-2xl px-3 py-2 font-semibold hover:bg-stone-100'
+                        onClick={()=>{
+                            localStorage.removeItem("token")
+                            localStorage.removeItem("user")
+                            Navigate("/")
+                        }}
+                    >Logout
+                    <IconLogout stroke={1}/>
+                    </Link>
+                    
+                </div>
+            ) : (
             <div className='flex justify-between items-center h-16'>
                 <div>
                     <Link to={"/"} 
-                    className='flex font-bold text-4xl text-orangeRed '>
-                        <CheckSquareOffset size={48} color="rgb(222, 72, 58)" weight="duotone" />
+                    className='flex font-bold text-3xl text-orangeRed '>
+                        <CheckSquareOffset size={38} color="rgb(222, 72, 58)" weight="duotone" />
                         Dolist
                     </Link>
                 </div>
-
-                {isAuth ? (<div className='flex gap-4 items-center justify-center'>
-                    
-                    <div className=' py-3 px-4 text-mateBlack font-semibold text-xl'>
-                        {localStorage.getItem("user")}
-                    </div>
-                    
-                    <Link 
-                        to={"/"}
-                        onClick={()=>{
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("user");
-                            setAuth(false)
-                        }}
-                    >
-                        <div className='bg-orangeRed text-white py-3 px-4 rounded-xl cursor-pointer font-semibold hover:bg-orange-700'>
-                            Logout
-                        </div>
-                    </Link>
-                </div>) : (<div className='flex gap-4 items-center justify-center'>
+                <div className='flex gap-4 items-center justify-center'>
                     <p className='font-semibold text-xl text-mateBlack'>Time & Tide wait for none</p>
                     <LineVertical size={35} color="#121212" weight="light" />
 
@@ -62,8 +70,9 @@ const Header = () => {
                             Start for free
                         </div>
                     </Link>
-                </div>)}
-            </div>
+                </div>
+            </div>)}
+           
         </nav>
     </header>
   )
