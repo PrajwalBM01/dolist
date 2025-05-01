@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import loginImage from '../assets/login.png'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { ToastContainer,toast } from 'react-toastify';
 import { useStore } from '../store';

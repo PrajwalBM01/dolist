@@ -1,15 +1,17 @@
-import React from "react";
-import Logo from "../assets/logo.svg"
+import React, { useState } from "react";
 import { FloatingDock } from "../components/FloatingDock";
 import {
   IconCheck,
   IconPlus,
   IconSearch,
-  IconCalendar
 } from "@tabler/icons-react";
+import AddTask from "./AddTask"
+import Popup from "./Popup";
+
 
 export function FloatingDockDemo() {
   const currentDate = new Date();
+  const [isopen, setisopen] = useState(false)
   const links = [
     {
       title: "Completed",
@@ -38,7 +40,7 @@ export function FloatingDockDemo() {
       icon: (
         <IconPlus className="h-full w-full text-white" />
       ),
-      href: "#",
+      clickHandel:()=>{setisopen(prev=>!prev)},
     },
     
 
@@ -48,6 +50,9 @@ export function FloatingDockDemo() {
     <div className="flex items-center justify-center h-[35rem] w-full">
       <FloatingDock
         items={links} />
+        <div>
+          <Popup isopen={isopen} Compnent={AddTask} setisopen={setisopen}/>
+        </div>
     </div>
   );
 }

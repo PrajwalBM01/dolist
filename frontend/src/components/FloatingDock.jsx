@@ -1,8 +1,3 @@
-/**
- * Note: Use position fixed according to your needs
- * Desktop navbar is better positioned at the bottom
- * Mobile navbar is better positioned at bottom right.
- **/
 
 import { cn } from "../utils";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
@@ -35,7 +30,7 @@ const FloatingDockDesktop = ({
         className
       )}>
       {items.map((item) => (
-        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+        <IconContainer mouseX={mouseX} key={item.title} {...item} onClick={item.clickHandel} />
       ))}
     </motion.div>
   );
@@ -45,7 +40,8 @@ function IconContainer({
   mouseX,
   title,
   icon,
-  href
+  href, 
+  onClick
 }) {
   let ref = useRef(null);
 
@@ -86,7 +82,9 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href}>
+    <button 
+      href={href}
+      onClick={onClick}>
       <motion.div
         ref={ref}
         style={{ width, height }}
@@ -110,6 +108,7 @@ function IconContainer({
           {icon}
         </motion.div>
       </motion.div>
-    </a>
+    </button>
   );
 }
+  

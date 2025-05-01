@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const DropdownButton = ({title, icon, Dropdown}) => {
+const DropdownButton = ({title, icon, Dropdown, state, setstate}) => {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -30,7 +30,7 @@ const DropdownButton = ({title, icon, Dropdown}) => {
             {icon}{title}
         </div>
 
-        {open && <Dropdown onClick={()=>setOpen(false)}/>}
+        {open && <Dropdown onClick={()=>setOpen(false)} state={state} setstate={setstate}/>}
     </div>
   )
 }

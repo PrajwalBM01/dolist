@@ -1,11 +1,12 @@
-import { CheckSquareOffset, LineVertical } from '@phosphor-icons/react'
 import React, { useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { useStore } from '../store'
 import { FloatingDockDemo } from '../components/FlotingDockDemo'
 import {
     IconUserFilled,
-    IconLogout
+    IconLogout,
+    IconChecklist,
+    IconMinusVertical
   } from "@tabler/icons-react";
 
 const Header = () => {
@@ -51,13 +52,14 @@ const Header = () => {
                 <div>
                     <Link to={"/"} 
                     className='flex font-bold text-3xl text-orangeRed '>
-                        <CheckSquareOffset size={38} color="rgb(222, 72, 58)" weight="duotone" />
+                        <IconChecklist size={40}/>
+
                         Dolist
                     </Link>
                 </div>
                 <div className='flex gap-4 items-center justify-center'>
                     <p className='font-semibold text-xl text-mateBlack'>Time & Tide wait for none</p>
-                    <LineVertical size={35} color="#121212" weight="light" />
+                    <IconMinusVertical size={40} stroke={1} />
 
                     <Link to={"/login"}>
                         <div className=' py-3 px-4 text-mateBlack cursor-pointer border border-transparent rounded-xl font-semibold hover:bg-stone-200 hover:text-black'>

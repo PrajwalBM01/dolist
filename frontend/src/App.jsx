@@ -7,7 +7,7 @@ import Signup from './pages/Signup'
 import Notfound from './pages/NotFOund'
 import Dashboard from './pages/Dashboard'
 import Protectedroutes from './components/Protectedroutes'
-import { useStore } from './store'
+
 
 const App = () => {
   
