@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FloatingDock } from "../components/FloatingDock";
 import {
   IconCheck,
@@ -11,7 +11,27 @@ import Popup from "./Popup";
 
 export function FloatingDockDemo() {
   const currentDate = new Date();
-  const [isopen, setisopen] = useState(false)
+  const [isopen, setisopen] = useState(false);
+  const popupRef = useRef(null);
+
+  useEffect(()=>{
+    function handleClickOutside(event){
+      if(popupRef.current && !popupRef.current.contains(event.target)){
+        setisopen(false);
+      }
+    }
+
+    if(isopen){
+      document.addEventListener("mousedown",handleClickOutside)
+    } else {
+      document.removeEventListener("mousedown",handleClickOutside)
+    }
+    
+    return()=>{
+      document.removeEventListener("mousedown",handleClickOutside)
+    };
+  },[isopen])
+
   const links = [
     {
       title: "Completed",
@@ -51,7 +71,7 @@ export function FloatingDockDemo() {
       <FloatingDock
         items={links} />
         <div>
-          <Popup isopen={isopen} Compnent={AddTask} setisopen={setisopen}/>
+          <Popup isopen={isopen} Compnent={AddTask} setisopen={setisopen} setref={popupRef}/>
         </div>
     </div>
   );

@@ -7,13 +7,13 @@ import {
 import PriorityDropdown from './PriorityDropdown';
 import DateDropdown from './DateDropdown';
 import DropdownButton from './DropdownButton';
-import { globalStore } from '../store';
-import axios from 'axios'
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
-const AddTask = ({cancel}) => {
+const AddTask = ({cancel,isopen,setisopen}) => {
     const [title, setTitle] = useState("");
     const [description, setdescription] = useState("");
-    const [priority,setPriority] = useState(4)
+    const [priority,setPriority] = useState(4);
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1); 
     tomorrow.setUTCHours(0, 0, 0, 0); 
@@ -21,7 +21,7 @@ const AddTask = ({cancel}) => {
     const [datetime,setdatetime] = useState(isoString);
     const [samedate,setSameDate] = useState(true)
     const dateArray = datetime ? datetime.split('T') : [];
-    const finalDate = `${datetime}:00.000Z`
+    const finalDate = samedate? datetime :`${datetime}:00.000Z`
 
 
     useEffect(()=>{
@@ -33,21 +33,26 @@ const AddTask = ({cancel}) => {
     },[datetime])
 
     async function addTask() {
-        const res = await axios.post(
-            'http://localhost:5000/api/v1/task/create',
-            {
-                title: title,
-                description: description,
-                priority: priority,
-                dueDate: finalDate
-            },
-            {
-                headers:{
-                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+        try {
+            const res = await axios.post(
+                'http://localhost:5000/api/v1/task/create',
+                {
+                    title: title,
+                    description: description,
+                    priority: priority,
+                    dueDate: finalDate
+                },
+                {
+                    headers:{
+                        'Authorization': `Bearer ${localStorage.getItem("token")}`
+                    }
                 }
-            }
-        );
-        console.log(res);
+            );
+            toast(res.data.msg);
+            setisopen(false);
+        } catch (error) {
+            toast(error.response?.data?.message || "Something went wrong");
+        }
     }
 
   return (
