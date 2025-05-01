@@ -9,11 +9,15 @@ import DateDropdown from './DateDropdown';
 import DropdownButton from './DropdownButton';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { exampleTasks } from '../utils';
+
 
 const AddTask = ({cancel,isopen,setisopen}) => {
     const [title, setTitle] = useState("");
     const [description, setdescription] = useState("");
     const [priority,setPriority] = useState(4);
+    const [exampleTitle, setExampleTitle] = useState("");
+    const [exampleDetail, setExampleDetail] = useState("");
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1); 
     tomorrow.setUTCHours(0, 0, 0, 0); 
@@ -23,6 +27,11 @@ const AddTask = ({cancel,isopen,setisopen}) => {
     const dateArray = datetime ? datetime.split('T') : [];
     const finalDate = samedate? datetime :`${datetime}:00.000Z`
 
+    useEffect(() => {
+        const randomTask = exampleTasks[Math.floor(Math.random() * exampleTasks.length)];
+        setExampleTitle(randomTask.title);
+        setExampleDetail(randomTask.description);
+    }, []);
 
     useEffect(()=>{
         if(isoString==datetime){
@@ -57,7 +66,7 @@ const AddTask = ({cancel,isopen,setisopen}) => {
 
   return (
     <div className='border rounded-xl p-2 border-stone-300 w-auto h-auto '>
-        <div className='flex gap-2 text-xs text-stone-400'>
+        <div className='flex gap-2 text-xs text-black'>
                     <div>{samedate ? "Today" : (
                             <div className='flex gap-2'>
                                 <div>{dateArray[0]}</div>
@@ -75,8 +84,8 @@ const AddTask = ({cancel,isopen,setisopen}) => {
                 id='title'
                 value={title}
                 onChange={e=> setTitle(e.target.value)}
-                placeholder='Go to gym'
-                className='border-none w-full focus:outline-none focus:ring-0 text-lg font-semibold'
+                placeholder={exampleTitle}
+                className='border-none w-full focus:outline-none focus:ring-0 text-lg placeholder:text-stone-300'
                  />
         </div>
 
@@ -86,7 +95,7 @@ const AddTask = ({cancel,isopen,setisopen}) => {
                 <textarea 
                     type="text"
                     id='description'
-                    placeholder='Details'
+                    placeholder={exampleDetail}
                     value={description}
                     rows={3}
                     onChange={e=> setdescription(e.target.value)}
@@ -95,7 +104,7 @@ const AddTask = ({cancel,isopen,setisopen}) => {
                                 [&::-webkit-scrollbar-track]:rounded-full
                             [&::-webkit-scrollbar-track]:bg-gray-100
                                 [&::-webkit-scrollbar-thumb]:rounded-full
-                            [&::-webkit-scrollbar-thumb]:bg-gray-300'
+                            [&::-webkit-scrollbar-thumb]:bg-gray-300 placeholder:text-stone-300'
                  /> 
                  
 

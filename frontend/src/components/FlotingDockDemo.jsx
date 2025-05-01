@@ -4,6 +4,7 @@ import {
   IconCheck,
   IconPlus,
   IconSearch,
+  IconListCheck
 } from "@tabler/icons-react";
 import AddTask from "./AddTask"
 import Popup from "./Popup";
@@ -49,9 +50,9 @@ export function FloatingDockDemo() {
       href: "#",
     },
     {
-      title: "Today",
+      title: "All Tasks",
       icon: (
-        <span className="text-white">{currentDate.getDate()}</span>
+        <IconListCheck className="h-full w-full text-white" />
       ),
       href: "#",
     },
