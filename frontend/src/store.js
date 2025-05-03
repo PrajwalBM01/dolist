@@ -8,4 +8,11 @@ const useStore = create(
     })),
 )
 
-export { useStore }
+const globalStore = create((set)=>({
+    splitscreen:false,
+    Showcomponent:null,
+    setShowcomponent:(value)=>set({Showcomponent:value}),
+    setSplitscreen:(value)=> set({splitscreen:value})
+}))
+
+export { useStore,globalStore }

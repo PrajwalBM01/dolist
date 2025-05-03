@@ -8,12 +8,18 @@ import {
 } from "@tabler/icons-react";
 import AddTask from "./AddTask"
 import Popup from "./Popup";
-
+import { globalStore } from "../store";
+import CompletedTasks from '../components/CompletedTasks'
+import AllTask from '../components/AllTask'
+import SearchTask from '../components/SearchTask'
 
 export function FloatingDockDemo() {
 
   const [isopen, setisopen] = useState(false);
+  const today = new Date()
   const popupRef = useRef(null);
+  const setSplitscreen = globalStore((state)=>state.setSplitscreen)
+  const setShowcomponent = globalStore((state)=>state.setShowcomponent)
 
   useEffect(()=>{
     function handleClickOutside(event){
@@ -39,7 +45,10 @@ export function FloatingDockDemo() {
       icon: (
         <IconCheck className="h-full w-full text-white" />
       ),
-      href: "#",
+      clickHandel:()=>{
+        setSplitscreen(true);
+        setShowcomponent(CompletedTasks)
+      },
     },
 
     {
@@ -47,14 +56,29 @@ export function FloatingDockDemo() {
       icon: (
         <IconSearch className="h-full w-full text-white" />
       ),
-      href: "#",
+      clickHandel:()=>{
+        setSplitscreen(true);
+        setShowcomponent(SearchTask)
+      },
+    },
+    {
+      title: "Today",
+      icon: (
+        <span className="text-white">{today.getDate()}</span>
+      ),
+      clickHandel:()=>{
+        setSplitscreen(false);
+      },
     },
     {
       title: "All Tasks",
       icon: (
         <IconListCheck className="h-full w-full text-white" />
       ),
-      href: "#",
+      clickHandel:()=>{
+        setSplitscreen(true);
+        setShowcomponent(AllTask)
+      },
     },
     {
       title: "Add Task",
