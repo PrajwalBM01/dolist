@@ -11,7 +11,7 @@ import Popup from "./Popup";
 
 
 export function FloatingDockDemo() {
-  const currentDate = new Date();
+
   const [isopen, setisopen] = useState(false);
   const popupRef = useRef(null);
 

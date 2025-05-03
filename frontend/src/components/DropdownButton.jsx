@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const DropdownButton = ({title, icon, Dropdown, state, setstate}) => {
+const DropdownButton = ({title, icon, Dropdown, state, setstate, style, onOpenChange}) => {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -22,11 +22,15 @@ const DropdownButton = ({title, icon, Dropdown, state, setstate}) => {
       };
     }, [open]);
 
+    useEffect(() => {
+      onOpenChange?.(open);
+    }, [open, onOpenChange]);
+
   return (
     <div className='relative inline-block' ref={dropdownRef}>
         <div
             onClick={() => setOpen(prev => !prev)} 
-            className=' flex gap-1.5 border px-2 py-[0.1rem] justify-center border-stone-500 rounded text-center text-sm cursor-pointer hover:bg-stone-100'>
+            className={style}>
             {icon}{title}
         </div>
 

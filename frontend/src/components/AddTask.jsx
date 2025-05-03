@@ -18,10 +18,10 @@ const AddTask = ({cancel,isopen,setisopen}) => {
     const [priority,setPriority] = useState(4);
     const [exampleTitle, setExampleTitle] = useState("");
     const [exampleDetail, setExampleDetail] = useState("");
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1); 
-    tomorrow.setUTCHours(0, 0, 0, 0); 
-    const isoString = tomorrow.toISOString();
+    const today = new Date();
+    today.setDate(today.getDate()); 
+    today.setUTCHours(23,59, 59, 0); 
+    const isoString = today.toISOString();
     const [datetime,setdatetime] = useState(isoString);
     const [samedate,setSameDate] = useState(true)
     const dateArray = datetime ? datetime.split('T') : [];
@@ -117,14 +117,16 @@ const AddTask = ({cancel,isopen,setisopen}) => {
                     Dropdown={DateDropdown}
                     state={datetime}
                     setstate={setdatetime}
+                    style='flex gap-1.5 border px-2 py-[0.1rem] justify-center border-stone-500 rounded text-center text-sm cursor-pointer hover:bg-stone-100'
                 />
 
-                <DropdownButton 
+                <DropdownButton className
                     title="Priorties" 
                     icon={<IconFlag size={20} stroke={1} />}
                     Dropdown={PriorityDropdown}
                     state={priority}
                     setstate={setPriority}
+                    style='flex gap-1.5 border px-2 py-[0.1rem] justify-center border-stone-500 rounded text-center text-sm cursor-pointer hover:bg-stone-100'
                 />
             </div>
             
