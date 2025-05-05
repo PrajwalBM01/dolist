@@ -15,4 +15,18 @@ const globalStore = create((set)=>({
     setSplitscreen:(value)=> set({splitscreen:value})
 }))
 
-export { useStore,globalStore }
+const taskStore = create((set)=>({
+    list:[],
+    setList:(value)=> set({list:value}),
+    addToList:(newtask)=> set((state) => ({ list: [...state.list, newtask] })),
+    deleteOneTask:(value)=>set((state)=>({
+        list: state.list.filter(item => item._id != value)
+    })),
+    updateTask:(value)=>set((state)=>({
+        list: state.list.map(item=>
+             item._id === value._id ? value : item
+        )
+    }))
+}))
+
+export { useStore, globalStore, taskStore }

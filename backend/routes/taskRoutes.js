@@ -99,7 +99,7 @@ router.patch("/update/:id",authUser,async(req,res)=>{
             });
         }
 
-        res.status(200).json({
+        res.status(201).json({
             msg: "Task updated successfully",
             task: updatedTask
         });

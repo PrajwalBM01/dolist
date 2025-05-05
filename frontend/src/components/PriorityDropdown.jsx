@@ -17,13 +17,13 @@ const PriorityDropdown = ({onClick,state,setstate}) => {
       title:"Priority 2",
       value:2,
       className:"flex gap-2 p-1 w-full justify-center text-sm cursor-pointer hover:bg-stone-100",
-      flag:<IconFlag3Filled fill='oklch(70.4% 0.191 22.216)'/>
+      flag:<IconFlag3Filled fill='oklch(54.6% 0.245 262.881)'/>
     },
     {
       title:"Priority 3",
       value:3,
       className:"flex gap-2 p-1 w-full justify-center text-sm cursor-pointer hover:bg-stone-100",
-      flag:<IconFlag3Filled fill='oklch(80.8% 0.114 19.571)'/>
+      flag:<IconFlag3Filled fill='oklch(82.8% 0.189 84.429)'/>
     },
     {
       title:"Priority 4",

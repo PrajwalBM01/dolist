@@ -9,31 +9,30 @@ import DateDropdown from './DateDropdown';
 import DropdownButton from './DropdownButton';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { exampleTasks } from '../utils';
 import { taskStore } from '../store';
 
-
-const AddTask = ({cancel,setisopen}) => {
-    const [title, setTitle] = useState("");
-    const [description, setdescription] = useState("");
-    const [priority,setPriority] = useState(4);
-    const [exampleTitle, setExampleTitle] = useState("");
-    const [exampleDetail, setExampleDetail] = useState("");
-    const addToList = taskStore((state)=>state.addToList)
+const EditTask = ({
+    cancel,
+    setisopen,
+    tasktitle,
+    taskdes,
+    taskpriority,
+    taskdue,
+    id
+}) => {
+    const [title, setTitle] = useState(tasktitle);
+    const [description, setdescription] = useState(taskdes);
+    const [priority,setPriority] = useState(taskpriority);
+    const updateTask = taskStore((state)=>state.updateTask)
     const today = new Date();
     today.setDate(today.getDate()); 
     today.setUTCHours(23,59, 59, 0); 
     const isoString = today.toISOString();
-    const [datetime,setdatetime] = useState(isoString);
+    const [datetime,setdatetime] = useState(taskdue);
     const [samedate,setSameDate] = useState(true)
     const dateArray = datetime ? datetime.split('T') : [];
     const finalDate = samedate? datetime :`${datetime}:00.000Z`
 
-    useEffect(() => {
-        const randomTask = exampleTasks[Math.floor(Math.random() * exampleTasks.length)];
-        setExampleTitle(randomTask.title);
-        setExampleDetail(randomTask.description);
-    }, []);
 
     useEffect(()=>{
         if(isoString==datetime){
@@ -43,10 +42,21 @@ const AddTask = ({cancel,setisopen}) => {
         }
     },[datetime])
 
-    async function addTask() {
+    function checkChange(){
+        if(
+            title==tasktitle 
+            && description==taskdes
+            && priority==taskpriority
+            && datetime==taskdue){
+                return true
+            }
+
+    }
+
+    async function editTask() {
         try {
-            const res = await axios.post(
-                'http://localhost:5000/api/v1/task/create',
+            const res = await axios.patch(
+                `http://localhost:5000/api/v1/task/update/${id}`,
                 {
                     title: title,
                     description: description,
@@ -61,7 +71,7 @@ const AddTask = ({cancel,setisopen}) => {
             );
             toast(res.data.msg);
             if(res.status==201){
-                addToList(res.data.task)
+                updateTask(res.data.task)
             }
             setisopen(false);
         } catch (error) {
@@ -75,7 +85,7 @@ const AddTask = ({cancel,setisopen}) => {
                     <div>{samedate ? "Today" : (
                             <div className='flex gap-2'>
                                 <div>{dateArray[0]}</div>
-                                <div>{dateArray[1]}</div>
+                                <div>{dateArray[1].split('.')[0]}</div>
                             </div>
                         
                         )}
@@ -89,7 +99,6 @@ const AddTask = ({cancel,setisopen}) => {
                 id='title'
                 value={title}
                 onChange={e=> setTitle(e.target.value)}
-                placeholder={exampleTitle}
                 className='border-none w-full focus:outline-none focus:ring-0 text-lg placeholder:text-stone-300'
                  />
         </div>
@@ -100,7 +109,6 @@ const AddTask = ({cancel,setisopen}) => {
                 <textarea 
                     type="text"
                     id='description'
-                    placeholder={exampleDetail}
                     value={description}
                     rows={3}
                     onChange={e=> setdescription(e.target.value)}
@@ -110,8 +118,7 @@ const AddTask = ({cancel,setisopen}) => {
                             [&::-webkit-scrollbar-track]:bg-gray-100
                                 [&::-webkit-scrollbar-thumb]:rounded-full
                             [&::-webkit-scrollbar-thumb]:bg-gray-300 placeholder:text-stone-300'
-                 /> 
-                 
+                 />
 
             </div>
 
@@ -146,14 +153,15 @@ const AddTask = ({cancel,setisopen}) => {
             >Cancel
             </button>
             <button 
-                disabled={title.length===0}
+                disabled={checkChange()}
                 className='cursor-pointer bg-orangeRed/90 rounded px-5 py-[0.4rem] text-sm font-semibold hover:bg-orangeRed text-white disabled:opacity-50 disabled:cursor-not-allowed'
-                onClick={addTask}
-            >Add
+                onClick={editTask}
+            >Edit
             </button>
         </div>
     </div>
   )
 }
 
-export default AddTask
+
+export default EditTask

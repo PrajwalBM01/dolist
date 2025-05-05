@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const DropdownButton = ({title, icon, Dropdown, state, setstate, style, onOpenChange}) => {
+const DropdownButton = ({title, icon, Dropdown, state, setstate, style}) => {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -22,9 +22,6 @@ const DropdownButton = ({title, icon, Dropdown, state, setstate, style, onOpenCh
       };
     }, [open]);
 
-    useEffect(() => {
-      onOpenChange?.(open);
-    }, [open, onOpenChange]);
 
   return (
     <div className='relative inline-block' ref={dropdownRef}>

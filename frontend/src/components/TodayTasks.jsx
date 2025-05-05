@@ -15,26 +15,23 @@ const TodayTasks = ({list}) => {
     }
   }
   return (
-        <div className=' h-full w-full flex flex-col items-center overflow-auto [&::-webkit-scrollbar]:w-2
+        <div className=' h-full w-full flex flex-col items-center overflow-auto [&::-webkit-scrollbar]:w-1
                                 [&::-webkit-scrollbar-track]:rounded-full
                             [&::-webkit-scrollbar-track]:bg-gray-100
                                 [&::-webkit-scrollbar-thumb]:rounded-full
                             [&::-webkit-scrollbar-thumb]:bg-gray-300'>
-        <h1 className=''>Today {isoString.split("T")[0]}</h1>
-        {list.filter(filterLogic).map((list,idx)=>(
+        <h1>Today {isoString.split("T")[0]}</h1>
+        {list && list.filter(filterLogic).sort((a,b)=> a.priority - b.priority).map((list,idx)=>(
           <TaskList 
             key={idx}
+            id={list._id}
             title={list.title} 
             description={list.description} 
             duedate={list.dueDate} 
             priority={list.priority}
+            completed={list.completed}
           />
         ))}
-        {/* <button 
-          className=' flex gap-1 items-center m-2 text-xs text-orangeRed cursor-pointer group'
-          onClick={()=>{AddTask}}
-        ><IconPlus className='group-hover:bg-orangeRed group-hover:text-white group-hover:rounded-full' size={15} stroke={2}/>
-          <div>Add Task</div></button> */}
       </div>
   )
 }

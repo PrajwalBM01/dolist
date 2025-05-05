@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ToastContainer } from 'react-toastify'
 import TodayTasks from '../components/TodayTasks'
-import { globalStore } from '../store'
+import { globalStore, taskStore } from '../store'
 
 const Dashboard = () => {
-  const [list, setlist] = useState([])
+  const list = taskStore((state)=>state.list)
+  const setList = taskStore((state)=>state.setList)
   const splitscreen = globalStore((state)=>state.splitscreen)
   const setSplitscreen = globalStore((state)=>state.setSplitscreen)
   const Showcomponent = globalStore((state)=>state.Showcomponent)
@@ -20,7 +21,7 @@ const Dashboard = () => {
           Authorization:`Bearer ${localStorage.getItem("token")}`
         }}
       )
-      setlist(res.data.list)
+      setList(res.data.list)
     }
     fetchTask();
 
@@ -28,7 +29,6 @@ const Dashboard = () => {
 
   return (
     <div className='relative container p-1 h-[600px]'>
-    <ToastContainer theme='dark'/>
       {splitscreen? (
       <div className='flex h-[600px] gap-1 justify-between items-center-2xl'>
       <div className=' h-full w-full flex flex-col items-center'>
