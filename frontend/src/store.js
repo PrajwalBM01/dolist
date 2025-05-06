@@ -26,7 +26,7 @@ const taskStore = create((set)=>({
         list: state.list.map(item=>
              item._id === value._id ? value : item
         )
-    }))
+    })),
 }))
 
 export { useStore, globalStore, taskStore }

@@ -31,7 +31,12 @@ const App = () => {
             <Route path='/*' element={<Notfound/>}/>
           </Routes>
         </main>
-        <ToastContainer position="top-center" theme='dark' />
+        <ToastContainer 
+          position="bottom-right"
+          autoClose={2000}
+          hideProgressBar
+          theme='dark'
+       />
       </div>
     </BrowserRouter>
   )

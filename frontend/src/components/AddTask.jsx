@@ -27,7 +27,9 @@ const AddTask = ({cancel,setisopen}) => {
     const [datetime,setdatetime] = useState(isoString);
     const [samedate,setSameDate] = useState(true)
     const dateArray = datetime ? datetime.split('T') : [];
-    const finalDate = samedate? datetime :`${datetime}:00.000Z`
+    
+    // Fix the date format issue by ensuring we don't append ":00.000Z" if it already exists
+    const finalDate = datetime ? datetime : isoString;
 
     useEffect(() => {
         const randomTask = exampleTasks[Math.floor(Math.random() * exampleTasks.length)];
@@ -75,7 +77,7 @@ const AddTask = ({cancel,setisopen}) => {
                     <div>{samedate ? "Today" : (
                             <div className='flex gap-2'>
                                 <div>{dateArray[0]}</div>
-                                <div>{dateArray[1]}</div>
+                                <div>{dateArray[1] ? dateArray[1].split('.')[0] : ""}</div>
                             </div>
                         
                         )}

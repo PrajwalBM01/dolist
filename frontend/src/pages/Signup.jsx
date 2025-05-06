@@ -31,7 +31,7 @@ const Signup = () => {
           localStorage.setItem("user", res.data.user);
           navigate('/dashboard');
           setAuth(true)
-        }, 4000);
+        }, 3000);
         
       }
     } catch (error) {
@@ -52,7 +52,6 @@ const Signup = () => {
 
   return (
     <div className=' flex items-center justify-center h-[600px]'>
-      <ToastContainer position="top-center" theme="dark"/>
       <div className='   container flex items-center justify-center gap-5'>
         <div className='  size-auto m-auto flex flex-col'>
           <div className='flex flex-col justify-center my-6'>

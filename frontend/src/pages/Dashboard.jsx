@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { ToastContainer } from 'react-toastify'
 import TodayTasks from '../components/TodayTasks'
 import { globalStore, taskStore } from '../store'
 
@@ -31,9 +30,7 @@ const Dashboard = () => {
     <div className='relative container p-1 h-[600px]'>
       {splitscreen? (
       <div className='flex h-[600px] gap-1 justify-between items-center-2xl'>
-      <div className=' h-full w-full flex flex-col items-center'>
-        {<Showcomponent list={list}/>}
-      </div>
+      <Showcomponent list={list}/>
       <div className='border border-stone-100'></div>
       <TodayTasks list={list}/>
       </div>

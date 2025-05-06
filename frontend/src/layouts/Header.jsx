@@ -52,8 +52,6 @@ const Header = () => {
                 <div>
                     <Link to={"/"} 
                     className='flex font-bold text-3xl text-orangeRed '>
-                        <IconChecklist size={40}/>
-
                         Dolist
                     </Link>
                 </div>

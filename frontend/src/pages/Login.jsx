@@ -51,7 +51,6 @@ const Login = () => {
 
   return (
     <div className='flex justify-center items-center h-[600px] '>
-      <ToastContainer position="top-center" theme="dark"/> 
       <div className='container flex justify-center items-center font-semibold size-auto my-6 gap-10'>
         <div>
           <img src={loginImage} alt="Login image" className='shadow-object' />
