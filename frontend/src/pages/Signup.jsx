@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import signupImage from '../assets/signup.png'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios"
 import { useStore } from '../store';
 
 const Signup = () => {
+  const BASE_URL = import.meta.env.VITE_API_URL
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +18,7 @@ const Signup = () => {
     e.preventDefault(); // Prevent default form submission (page reload)
 
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/auth/signup",{
+      const res = await axios.post(`${BASE_URL}/api/v1/auth/signup`,{
         username,
         email,
         password

@@ -21,6 +21,7 @@ const TaskList = ({
   completed,
   lastupdate
 }) => {
+  const BASE_URL = import.meta.env.VITE_API_URL
   const [colour, setColour] = useState('border-stone-400 text-stone-50')
   const deleteOneTask = taskStore((state)=>state.deleteOneTask)
   const updateTask = taskStore((state)=>state.updateTask)
@@ -59,7 +60,7 @@ const TaskList = ({
   async function deleteTask() {
     try{
       const res = await axios.delete(
-        `http://localhost:5000/api/v1/task/delete/${id}`,
+        `${BASE_URL}/api/v1/task/delete/${id}`,
         {headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }}
@@ -76,7 +77,7 @@ const TaskList = ({
   async function restore() {
     try{
       const res = await axios.patch(
-        `http://localhost:5000/api/v1/task/update/${id}`,
+        `${BASE_URL}/api/v1/task/update/${id}`,
         {completed:false},
         {headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
@@ -94,7 +95,7 @@ const TaskList = ({
   async function update() {
     try{
       const res = await axios.patch(
-        `http://localhost:5000/api/v1/task/complete/${id}`,
+        `${BASE_URL}/api/v1/task/complete/${id}`,
         {},
         {headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`

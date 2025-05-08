@@ -4,6 +4,7 @@ import TodayTasks from '../components/TodayTasks'
 import { globalStore, taskStore } from '../store'
 
 const Dashboard = () => {
+  const BASE_URL = import.meta.env.VITE_API_URL
   const list = taskStore((state)=>state.list)
   const setList = taskStore((state)=>state.setList)
   const splitscreen = globalStore((state)=>state.splitscreen)
@@ -15,7 +16,7 @@ const Dashboard = () => {
     setSplitscreen(false)
     async function fetchTask() {
       const res = await axios.get(
-        'http://localhost:5000/api/v1/task/list',
+        `${BASE_URL}/api/v1/task/list`,
         {headers:{
           Authorization:`Bearer ${localStorage.getItem("token")}`
         }}

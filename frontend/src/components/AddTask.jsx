@@ -14,6 +14,7 @@ import { taskStore } from '../store';
 
 
 const AddTask = ({cancel,setisopen}) => {
+    const BASE_URL = import.meta.env.VITE_API_URL
     const [title, setTitle] = useState("");
     const [description, setdescription] = useState("");
     const [priority,setPriority] = useState(4);
@@ -27,8 +28,6 @@ const AddTask = ({cancel,setisopen}) => {
     const [datetime,setdatetime] = useState(isoString);
     const [samedate,setSameDate] = useState(true)
     const dateArray = datetime ? datetime.split('T') : [];
-    
-    // Fix the date format issue by ensuring we don't append ":00.000Z" if it already exists
     const finalDate = datetime ? datetime : isoString;
 
     useEffect(() => {
@@ -48,7 +47,7 @@ const AddTask = ({cancel,setisopen}) => {
     async function addTask() {
         try {
             const res = await axios.post(
-                'http://localhost:5000/api/v1/task/create',
+                `${BASE_URL}/api/v1/task/create`,
                 {
                     title: title,
                     description: description,

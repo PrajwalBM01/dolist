@@ -5,7 +5,6 @@ import { FloatingDockDemo } from '../components/FlotingDockDemo'
 import {
     IconUserFilled,
     IconLogout,
-    IconChecklist,
     IconMinusVertical
   } from "@tabler/icons-react";
 
@@ -43,7 +42,7 @@ const Header = () => {
                     <FloatingDockDemo/>
                     
                     <button 
-                        className='flex gap-2 rounded-2xl px-3 py-2 font-semibold hover:bg-stone-100'
+                        className='flex gap-2 rounded-2xl px-3 py-2 font-semibold cursor-pointer hover:bg-stone-200'
                         onClick={handleLogout}
                     >
                         Logout

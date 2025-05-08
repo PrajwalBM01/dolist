@@ -20,6 +20,7 @@ const EditTask = ({
     taskdue,
     id
 }) => {
+    const BASE_URL = import.meta.env.VITE_API_URL
     const [title, setTitle] = useState(tasktitle);
     const [description, setdescription] = useState(taskdes);
     const [priority,setPriority] = useState(taskpriority);
@@ -31,8 +32,6 @@ const EditTask = ({
     const [datetime,setdatetime] = useState(taskdue);
     const [samedate,setSameDate] = useState(true)
     const dateArray = datetime ? datetime.split('T') : [];
-    
-    // Fix the date format issue by ensuring we don't append ":00.000Z" if it already exists
     const finalDate = datetime ? datetime : isoString;
 
     useEffect(()=>{
@@ -57,7 +56,7 @@ const EditTask = ({
     async function editTask() {
         try {
             const res = await axios.patch(
-                `http://localhost:5000/api/v1/task/update/${id}`,
+                `${BASE_URL}/api/v1/task/update/${id}`,
                 {
                     title: title,
                     description: description,
