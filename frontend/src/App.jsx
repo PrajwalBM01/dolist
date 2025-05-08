@@ -6,7 +6,7 @@ import Landing from './pages/Landing'
 import Header from './layouts/Header'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Notfound from './pages/NotFound'
+import Notfound from './pages/Notfound'
 import Dashboard from './pages/Dashboard'
 import Protectedroutes from './components/Protectedroutes'
 
