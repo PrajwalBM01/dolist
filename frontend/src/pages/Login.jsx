@@ -72,7 +72,7 @@ const Login = () => {
                       required
                       value={email}
                       onChange={(e)=>{setemail(e.target.value)}}
-                      className='border rounded p-1 w-3/5 hover:border-orangeRed'
+                      className='border rounded p-1 w-3/5 hover:border-orangeRed focus:outline-0 focus:border-orangeRed'
                       placeholder='jessepinkman@gmail.com' 
                     />
                   </div>
@@ -87,7 +87,7 @@ const Login = () => {
                       required
                       value={password}
                       onChange={(e)=>{setpassword(e.target.value)}}
-                      className='border rounded p-1 w-3/5 hover:border-orangeRed'
+                      className='border rounded p-1 w-3/5 hover:border-orangeRed focus:outline-0 focus:border-orangeRed'
                       placeholder='itsbasicchemistry' />
                   </div>
 

@@ -70,7 +70,7 @@ const Signup = () => {
                   value={username}
                   onChange={(e)=>{setUsername(e.target.value)}}
                   required
-                  className='border rounded p-1 my-1 w-3/4 transition-all duration-300 hover:border-orangeRed '
+                  className='border rounded p-1 my-1 w-3/4 transition-all duration-300 hover:border-orangeRed focus:outline-0 focus:border-orangeRed'
                   placeholder='Walter_White' />
               </div>
 
@@ -84,7 +84,7 @@ const Signup = () => {
                   value={email}
                   onChange={(e)=>{setEmail(e.target.value)}}
                   required
-                  className='border rounded p-1 my-1 w-3/4 transition-all duration-300 hover:border-orangeRed'
+                  className='border rounded p-1 my-1 w-3/4 transition-all duration-300 hover:border-orangeRed focus:outline-0 focus:border-orangeRed'
                   placeholder='breakingbad@gmail.com' />
               </div>
 
@@ -98,7 +98,7 @@ const Signup = () => {
                   value={password}
                   onChange={(e)=>{setPassword(e.target.value)}}
                   required  
-                  className='border rounded p-1 my-1 w-3/4 transition-all duration-300 hover:border-orangeRed '
+                  className='border rounded p-1 my-1 w-3/4 transition-all duration-300 hover:border-orangeRed focus:outline-0 focus:border-orangeRed'
                   placeholder='watchmecook'/>
               </div>
 

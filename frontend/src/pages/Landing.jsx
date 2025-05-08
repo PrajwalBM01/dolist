@@ -7,8 +7,7 @@ const Landing = () => {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100">
-      {/* Hero Section */}
-      <div className="container mx-auto px-6 py-16 text-center">
+      <div className="container mx-auto px-6 my-10 text-center">
         <h1 className="text-5xl font-bold text-black mb-8">
           Organize Your Tasks, <br />
           <span className="text-orangeRed">Achieve Your Goals</span>
@@ -18,8 +17,7 @@ const Landing = () => {
         </p>
       </div>
 
-      {/* Features Section */}
-      <div className="container mx-auto px-6 py-16">
+      <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
           Why Choose Our Task Manager?
         </h2>

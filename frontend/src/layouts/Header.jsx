@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from '../store'
 import { FloatingDockDemo } from '../components/FlotingDockDemo'
 import {
@@ -12,6 +12,7 @@ import {
 const Header = () => {
     const isAuth = useStore((state) => state.isAuth);
     const setAuth = useStore((state) => state.setAuth);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const isToken = localStorage.getItem("token");
@@ -22,6 +23,12 @@ const Header = () => {
         }
     }, [isAuth]);
     
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setAuth(false);
+        navigate("/");
+    };
 
   return (
     <header className='w-full '>
@@ -30,21 +37,18 @@ const Header = () => {
                 <div className='flex justify-center items-center h-16 my-3'>
                     <div className='flex gap-1 font-semibold rounded-2xl px-3 py-2'>
                         <IconUserFilled className='text-orangeRed'/>
-                        {localStorage.getItem("user")}
+                        <span className='w-auto'>{localStorage.getItem("user")}</span>
                     </div>
 
                     <FloatingDockDemo/>
                     
-                    <Link 
-                        className=' flex gap-2 rounded-2xl px-3 py-2 font-semibold hover:bg-stone-100'
-                        onClick={()=>{
-                            localStorage.removeItem("token")
-                            localStorage.removeItem("user")
-                            Navigate("/")
-                        }}
-                    >Logout
-                    <IconLogout stroke={1}/>
-                    </Link>
+                    <button 
+                        className='flex gap-2 rounded-2xl px-3 py-2 font-semibold hover:bg-stone-100'
+                        onClick={handleLogout}
+                    >
+                        Logout
+                        <IconLogout stroke={1}/>
+                    </button>
                     
                 </div>
             ) : (
