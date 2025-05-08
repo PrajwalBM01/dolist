@@ -22,7 +22,7 @@ const Login = () => {
         password
       })
 
-      toast(res.data.msg)
+      toast(`${res.data.msg} redirecting`)
 
       if(res.status===201){
         setTimeout(() => {
@@ -30,7 +30,7 @@ const Login = () => {
         localStorage.setItem("user", res.data.user);
           navigate("/dashboard")
           setAuth(true)
-        }, 2000);
+        }, 1000);
       }
 
     }catch(error){

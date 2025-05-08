@@ -18,10 +18,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Features</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Pricing</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">About Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Contact</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-orangeRed transition">Features</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-orangeRed transition">Pricing</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-orangeRed transition">About Us</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-orangeRed transition">Contact</a></li>
             </ul>
           </div>
 
@@ -29,10 +29,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Resources</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Blog</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Documentation</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Support</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-orangeRed transition">Blog</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-orangeRed transition">Documentation</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-orangeRed transition">Support</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-orangeRed transition">Privacy Policy</a></li>
             </ul>
           </div>
 
@@ -40,13 +40,13 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a href="https://github.com/PrajwalBM01/dolist.git" className="text-gray-400 hover:text-orangeRed transition">
                 <FaGithub className="text-2xl" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a href="https://x.com/PrajwalBM232626" className="text-gray-400 hover:text-orangeRed transition">
                 <FaTwitter className="text-2xl" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              <a href="https://www.linkedin.com/in/prajwal-bm-802196256/" className="text-gray-400 hover:text-orangeRed transition">
                 <FaLinkedin className="text-2xl" />
               </a>
             </div>

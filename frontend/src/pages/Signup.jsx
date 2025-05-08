@@ -24,7 +24,7 @@ const Signup = () => {
         password
       });
 
-      toast(res.data.msg);
+      toast(`${res.data.msg} redirecting`)
 
       if(res.status === 201){
         setTimeout(() => {
@@ -32,7 +32,7 @@ const Signup = () => {
           localStorage.setItem("user", res.data.user);
           navigate('/dashboard');
           setAuth(true)
-        }, 3000);
+        }, 1000);
         
       }
     } catch (error) {
